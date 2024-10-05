@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo1"
+    android:padding="16dp"
+    tools:context=".Configuracion">
+
+    <GridLayout
+        android:id="@+id/gridLa1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="2"
+        android:columnCount="3"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+        >
+
+        <!-- Primera fila -->
+        <ImageButton
+            android:id="@+id/regresar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="bottom|center"
+            android:background="@android:color/transparent"
+            android:contentDescription="salir de la app"
+            android:scaleType="fitCenter"
+            android:src="@drawable/regresar"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:text="Configuración"
+            android:textSize="38sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/creatodisplaybold"
+            android:gravity="center"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_gravity="bottom|center"
+            android:layout_marginStart="12dp"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <!-- Segunda fila -->
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="1"
+            android:layout_column="2" />
+
+    </GridLayout>
+
+    <ImageView
+        android:id="@+id/fotoperfil"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/gridLa1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/fotoperfilpordefecto"
+        android:background="@drawable/formacircular_pf_img"
+        android:scaleType="centerCrop"
+        android:clipToOutline="true"/>
+
+
+    <!-- Elementos desplazables: Contenidos dentro del ScrollView -->
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fotoperfil"
+        android:background="@drawable/rounded_corner">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/creatodisplaymedium"
+                android:text="Aquí puedes actualizar tus datos"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <!-- Campo de nombre de usuario -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="62sp"
+                android:layout_marginBottom="16dp"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nombreUsuarioInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresa tu nombre"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo de contraseña -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/ingresar_contrase_a"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/btn_buttonActualizarDatos"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:text="Actualizar datos"
+                android:fontFamily="@font/creatodisplaybold"
+                android:textSize="20sp"
+                android:layout_marginTop="42dp"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="@color/azul"
+                android:elevation="8dp"/>
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/creatodisplaymedium"
+                android:text="Aquí puedes agregar un objetivo de cultivo."
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <!-- Campo de lista de objetivos -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/menuObjetivo"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Selecciona un objetivo de cultivo">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteObjetivo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_buttonGuardarObjetivo"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:text="Guardar Objetivo"
+                android:fontFamily="@font/creatodisplaybold"
+                android:textSize="20sp"
+                android:layout_marginTop="42dp"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="@color/azul"
+                android:elevation="8dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

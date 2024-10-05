@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">GrowPlant</string>
+    <string name="iniciar_sesi_n">Iniciar Sesión</string>
+    <string name="accede_para_gestionar_tus_plantas">Accede para gestionar tus plantas</string>
+    <string name="ingresar_correo_electr_nico">Ingresa tu correo electrónico</string>
+    <string name="ingresar_contrase_a">Ingresa tu contraseña</string>
+    <string name="no_tienes_cuenta_registrate"><u>¿No tienes cuenta? Registrate</u></string>
+    <string name="ingresar">Ingresar</string>
+    <string name="logogrowplant">logoGrowplant</string>
+    <string name="confirmar_constrase_a">Confirmar Constraseña</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="ya_tienes_cuenta_iniciar_sesi_n"><u>¿Ya tienes cuenta? Iniciar Sesión</u></string>
+    <string name="confirmacion_term_condiciones">Al hacer clic en registrarse, confirmo que acepto nuestros términos y condiciones</string>
+    <string name="image_desc_1">configuracion icono</string>
+    <string name="image_desc_2">registro plantas icono</string>
+    <string name="image_desc_3">estadisticas icono</string>
+    <string name="image_desc_4">informacion icono</string>
+    <string name="image_desc_5">recursos icono</string>
+
+
+    <string-array name="objetivos_plantacion">
+        <item>Maximizar el rendimiento de los cultivos en espacios reducidos.</item>
+        <item>Reducir el uso de recursos hídricos mediante riego eficiente.</item>
+        <item>Fomentar la diversidad de plantas y cultivos.</item>
+        <item>Utilizar técnicas sostenibles y orgánicas en la producción.</item>
+        <item>Incrementar la producción de alimentos frescos</item>
+        <item>Mejorar la salud del suelo mediante prácticas adecuadas.</item>
+    </string-array>
+
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
