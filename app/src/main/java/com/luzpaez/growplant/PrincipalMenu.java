@@ -1,5 +1,7 @@
 package com.luzpaez.growplant;
 
+import static com.luzpaez.growplant.R.id.IrRegistroPlantasHome;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -57,6 +59,16 @@ public class PrincipalMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PrincipalMenu.this, Configuracion.class);
+                startActivity(intent);
+            }
+        });
+
+        // Botón para redirigir a la actividad de RegistroPlantas
+        CardView cardRegistroPlantasHome = findViewById(R.id.IrRegistroPlantasHome);
+        cardRegistroPlantasHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PrincipalMenu.this, RegistroPlantasHome.class);
                 startActivity(intent);
             }
         });
