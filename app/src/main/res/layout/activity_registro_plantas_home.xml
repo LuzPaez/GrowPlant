@@ -79,7 +79,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        tools:listitem="@layout/item_plant" />
+        tools:listitem="@layout/item_plant"
+        />
 
     <!-- Botón flotante para agregar una planta -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
