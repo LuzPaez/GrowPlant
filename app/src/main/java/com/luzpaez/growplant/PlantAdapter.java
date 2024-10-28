@@ -1,7 +1,7 @@
 package com.luzpaez.growplant;
-
-// PlantAdapter.java
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +40,18 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
         Glide.with(context)
                 .load(plant.getImageUrl())
                 .into(holder.ivPlanta);
+
+        // Establecer un OnClickListener en el CardView
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crear un Intent para la actividad DetallesPlanta
+                Intent intent = new Intent(context, DetallesPlanta.class);
+                // Pasar el objeto Plant al DetallesPlanta
+                intent.putExtra("plant_key", (Parcelable) plant); // Asegúrate de que Plant implemente Parcelable o Serializable
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
