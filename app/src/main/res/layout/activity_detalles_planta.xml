@@ -2,13 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mientras"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".DetallesPlanta">
+    android:padding="16dp">
 
     <!-- Contenedor para el título, icono y botón de salida -->
     <LinearLayout
@@ -45,135 +43,146 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Contenedor de detalles -->
+            <!-- Contenedor de detalles en un CardView -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/container_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp">
+                    android:padding="20dp">
 
                     <!-- Imagen de la planta -->
                     <ImageView
-                        android:id="@+id/plant_image_detail"
+                        android:id="@+id/iv_planta"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
-                        android:layout_marginBottom="12dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/fotoperfilpordefecto"
-                        app:layout_constraintBottom_toTopOf="@+id/tv_name_detail"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintEnd_toEndOf="parent" />
 
+                    <!-- Nombre de la planta -->
+                    <!--Campo para el nombre común-->
                     <TextView
-                        android:id="@+id/tv_name_detail"
-                        android:layout_width="match_parent"
+                        android:id="@+id/tv_name_comun"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Nombre Planta"
+                        android:text="Nombre de la Planta"
                         android:textColor="@color/black"
-                        android:textSize="30sp"
+                        android:textSize="24sp"
                         android:textStyle="bold"
-                        android:layout_marginTop="12dp"
-                        app:layout_constraintTop_toBottomOf="@id/plant_image_detail" />
+                        app:layout_constraintTop_toBottomOf="@id/iv_planta"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="16dp" />
 
+                    <!-- Descripción -->
                     <TextView
-                        android:id="@+id/tv_description_detail"
-                        android:layout_width="match_parent"
+                        android:id="@+id/tv_name_cientifico"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Descripción de la planta."
+                        android:text="Nombre Cientifico."
                         android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@id/tv_name_detail" />
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_name_comun"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- Familia de la planta -->
+                    <TextView
+                        android:id="@+id/tv_family_detail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Familia: Nombre de la Familia"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="italic"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_name_cientifico"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- Fecha de registro -->
+                    <TextView
+                        android:id="@+id/tv_date_detail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha de registro: YYYY-MM-DD"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_family_detail"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- Cantidad de plantas -->
+                    <TextView
+                        android:id="@+id/tv_quantity_detail"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Cantidad registrada: X plantas"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_date_detail"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Botones de eliminar y actualizar -->
+            <!-- Familia de la Planta -->
+            <TextView
+                android:id="@+id/ActualizacionHeaderTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="La actualización solo es posible para el dato de cantidad"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:layout_marginTop="20dp" />
+            <!-- Botones de acción -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginTop="16dp">
 
                 <Button
-                    android:id="@+id/btn_delete_section"
+                    android:id="@+id/btnDeletePlant"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/rojo"
                     android:text="Eliminar"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:backgroundTint="@color/rojo" />
 
                 <Button
-                    android:id="@+id/btn_update_section"
+                    android:id="@+id/btnUpdatePlant"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/azul"
+                    android:layout_marginStart="8dp"
                     android:text="Actualizar"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:backgroundTint="@color/azul" />
             </LinearLayout>
-
-            <!-- EditTexts para ingresar datos -->
-            <EditText
-                android:id="@+id/et_growth_progress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/searchview_background"
-                android:hint="Progreso de Crecimiento"
-                android:padding="10dp" />
-
-            <EditText
-                android:id="@+id/et_watering_frequency"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/searchview_background"
-                android:hint="Frecuencia de Riego"
-                android:padding="10dp" />
-
-            <EditText
-                android:id="@+id/et_fertilizer_amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/searchview_background"
-                android:hint="Cantidad de Fertilizante"
-                android:padding="10dp" />
-
-            <!-- Botón para guardar los datos -->
-            <Button
-                android:id="@+id/btn_save_data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/searchview_background"
-                android:text="Guardar Datos"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
