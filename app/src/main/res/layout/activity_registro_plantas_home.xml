@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
-    <!-- Imagen de perfil -->
+    <!-- Imagen referente a la actividad -->
     <ImageView
         android:id="@+id/iconRegistroPlantas"
         android:layout_width="90dp"
@@ -37,7 +37,7 @@
         android:layout_marginTop="20dp"
         />
 
-    <!-- Título debajo de la imagen de perfil -->
+    <!-- Título debajo de la imagen referente a la actividad  -->
     <TextView
         android:id="@+id/titulo"
         android:layout_width="wrap_content"
