@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -45,12 +44,44 @@
         android:layout_below="@id/plantNameTextView"
         android:layout_marginTop="8dp" />
 
+    <!-- TextView para mostrar la familia de la planta -->
+    <TextView
+        android:id="@+id/plantFamilyTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/plantDescriptionTextView"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:textStyle="italic" />
+
+    <!-- EditText para la fecha actual -->
+    <EditText
+        android:id="@+id/plantDateEditText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/plantFamilyTextView"
+        android:layout_marginTop="8dp"
+        android:hint="Fecha (YYYY-MM-DD)"
+        android:inputType="none"
+        android:enabled="false"
+        />
+
+    <!-- EditText para la cantidad de plantas -->
+    <EditText
+        android:id="@+id/plantQuantityEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/plantDateEditText"
+        android:layout_marginTop="8dp"
+        android:hint="Cantidad de plantas"
+        android:inputType="number" />
+
     <Button
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="Guardar Planta"
-        android:layout_below="@id/plantDescriptionTextView"
+        android:layout_below="@id/plantQuantityEditText"
         android:layout_marginTop="16dp" />
 
     <Button
