@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,7 +76,7 @@ public class AgregarPlanta extends AppCompatActivity {
         Button selectImageButton = findViewById(R.id.selectImageButton);
         Button analyzeButton = findViewById(R.id.analyzeButton);
         Button saveButton = findViewById(R.id.saveButton);
-        Button backButton = findViewById(R.id.backButton);
+        ImageButton backButton = findViewById(R.id.backButton);
 
         // Inicializar Firebase
         auth = FirebaseAuth.getInstance();
@@ -129,7 +130,7 @@ public class AgregarPlanta extends AppCompatActivity {
             // Aquí se agrega la api key
 
             String boundary = "----WebKitFormBoundary" + System.currentTimeMillis();
-            String apiUrl = "https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&nb-results=10&lang=es&api-key=################";
+            String apiUrl = "https://my-api.plantnet.org/v2/identify/all?include-related-images=false&no-reject=false&nb-results=10&lang=es&api-key=#################";
 
             new Thread(() -> {
                 try {
@@ -200,6 +201,9 @@ public class AgregarPlanta extends AppCompatActivity {
             return;
         }
 
+        // Convertir plantQuantity a Integer
+        int quantity = Integer.parseInt(plantQuantity); // Convertir de String a int
+
         // Obtener el ID del usuario autenticado
         String userId = auth.getCurrentUser().getUid();
         String plantId = databaseReference.push().getKey();
@@ -215,7 +219,7 @@ public class AgregarPlanta extends AppCompatActivity {
                 plantData.put("description", plantDescription);
                 plantData.put("family", plantFamily);
                 plantData.put("date", plantDate);
-                plantData.put("quantity", plantQuantity);
+                plantData.put("quantity", quantity); // Guardar como int
                 plantData.put("image_url", downloadUrl.toString());
 
                 // Guardar datos en la base de datos
