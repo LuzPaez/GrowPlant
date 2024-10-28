@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -65,5 +66,6 @@ dependencies {
 
     implementation (libs.android.volley)// Para manejar las peticiones HTTP
     implementation ("org.json:json:20210307") // Para manejar JSON (puedes omitir esto si ya tienes alguna librería para manejar JSON)
+
 
 }
