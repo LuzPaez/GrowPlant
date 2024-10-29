@@ -34,8 +34,6 @@ android {
 }
 
 
-
-
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -65,7 +63,11 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp:4.12.0")
 
     implementation (libs.android.volley)// Para manejar las peticiones HTTP
-    implementation ("org.json:json:20210307") // Para manejar JSON (puedes omitir esto si ya tienes alguna librería para manejar JSON)
+    implementation ("org.json:json:20210307") // Para manejar JSON
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    //implementation (project(":MPChartLib"))
+
+
 
 
 }
