@@ -73,6 +73,16 @@ public class PrincipalMenu extends AppCompatActivity {
             }
         });
 
+        // Botón para redirigir a la actividad de Estadisticas
+        CardView cardEstadisticas = findViewById(R.id.IrEstadisticas);
+        cardEstadisticas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PrincipalMenu.this, Estadisticas.class);
+                startActivity(intent);
+            }
+        });
+
         // Botón para salir de la aplicación
         btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
