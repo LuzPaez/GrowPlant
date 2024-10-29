@@ -4,7 +4,7 @@
     <!-- Permisos de acceso al almacenamiento -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GrowPlant"
         tools:targetApi="31">
+        <activity
+            android:name=".Estadisticas"
+            android:exported="false" />
         <activity
             android:name=".DetallesPlanta"
             android:exported="false" />
