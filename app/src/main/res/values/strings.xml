@@ -27,6 +27,15 @@
         <item>Mejorar la salud del suelo mediante prácticas adecuadas.</item>
     </string-array>
 
+    <string-array name="preguntas_array">
+        <item>¿Con qué frecuencia debo regar esta planta?</item>
+        <item>¿Cuáles son los fertilizantes más adecuados?</item>
+        <item>¿Cuál es la ubicación ideal para esta planta?</item>
+        <item>¿Qué tipo de suelo es más adecuado para esta planta?</item>
+        <item>¿Cuántas horas de luz solar necesita?</item>
+        <item>¿Cuál es la temperatura ideal para su crecimiento?</item>
+    </string-array>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
