@@ -60,14 +60,15 @@ public class DetallesPlanta extends AppCompatActivity {
 
         ImageButton btnRegresarPrincipal = findViewById(R.id.regresar);
 
-        // Listener para el botón de regresar a la página principal
+        // Listener para el botón de regresar
         btnRegresarPrincipal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetallesPlanta.this, RegistroPlantasHome.class);
-                startActivity(intent);
+                finish(); // Esto cierra la actividad actual y regresa a la anterior
             }
         });
+
+
 
         // Inicializar vistas
         plantImage = findViewById(R.id.iv_planta);
