@@ -48,7 +48,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
                 // Crear un Intent para la actividad DetallesPlanta
                 Intent intent = new Intent(context, DetallesPlanta.class);
                 // Pasar el objeto Plant al DetallesPlanta
-                intent.putExtra("plant_key", (Parcelable) plant); // Asegúrate de que Plant implemente Parcelable o Serializable
+                intent.putExtra("plant_key", (Parcelable) plant); // Plant implementa Parcelable o Serializable
                 context.startActivity(intent);
             }
         });
