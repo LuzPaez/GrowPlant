@@ -83,6 +83,16 @@ public class PrincipalMenu extends AppCompatActivity {
             }
         });
 
+        // Botón para redirigir a la actividad de Informacion
+        CardView cardInformacion = findViewById(R.id.IrInformacion);
+        cardInformacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PrincipalMenu.this, Informacion.class);
+                startActivity(intent);
+            }
+        });
+
         // Botón para salir de la aplicación
         btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
