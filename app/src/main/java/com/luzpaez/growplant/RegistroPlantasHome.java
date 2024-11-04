@@ -85,14 +85,24 @@ public class RegistroPlantasHome extends AppCompatActivity {
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    plantList.clear();
+                    plantList.clear(); // Limpiar la lista antes de llenarla
                     for (DataSnapshot plantSnapshot : snapshot.getChildren()) {
-                        Plant plant = plantSnapshot.getValue(Plant.class);
-                        if (plant != null) {
-                            plantList.add(plant);
-                        }
+                        // Obtener el ID de la planta
+                        String plantId = plantSnapshot.getKey();
+                        // Obtener otros campos
+                        String date = plantSnapshot.child("date").getValue(String.class);
+                        String description = plantSnapshot.child("description").getValue(String.class);
+                        String family = plantSnapshot.child("family").getValue(String.class);
+                        String imageUrl = plantSnapshot.child("image_url").getValue(String.class);
+                        String name = plantSnapshot.child("name").getValue(String.class);
+                        int quantity = plantSnapshot.child("quantity").getValue(Integer.class);
+
+                        // Crear una instancia de Plant
+                        Plant plant = new Plant(plantId, date, description, family, imageUrl, name, quantity);
+                        // Agregar la planta a la lista
+                        plantList.add(plant);
                     }
-                    plantAdapter.notifyDataSetChanged();
+                    plantAdapter.notifyDataSetChanged(); // Notificar al adaptador que los datos han cambiado
                 }
 
                 @Override
@@ -102,4 +112,5 @@ public class RegistroPlantasHome extends AppCompatActivity {
             });
         }
     }
+
 }
