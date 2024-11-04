@@ -131,18 +131,20 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
 
-                    <!-- Cantidad de plantas -->
-                    <TextView
-                        android:id="@+id/tv_quantity_detail"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Cantidad registrada: X plantas"
+                    <!-- Cantidad de plantas como EditText -->
+                    <EditText
+                        android:id="@+id/et_quantity_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Cantidad registrada"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:layout_marginTop="12dp"
+                        android:enabled="false"
                         app:layout_constraintTop_toBottomOf="@id/tv_date_detail"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
