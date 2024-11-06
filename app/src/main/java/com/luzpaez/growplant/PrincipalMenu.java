@@ -93,6 +93,15 @@ public class PrincipalMenu extends AppCompatActivity {
             }
         });
 
+        // Botón para redirigir a la actividad de Recordatorio_(Cambiar IrRecursos cuando se cree, IrRecordatorios)
+        CardView cardRecordatorio = findViewById(R.id.IrRecursos);
+        cardRecordatorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PrincipalMenu.this, RecordatoriosActivity.class);
+                startActivity(intent);
+            }
+        });
         // Botón para salir de la aplicación
         btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
