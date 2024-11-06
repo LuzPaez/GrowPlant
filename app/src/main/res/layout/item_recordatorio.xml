@@ -1,0 +1,63 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="16dp"
+    android:elevation="4dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Imagen de la tarea -->
+        <ImageView
+            android:id="@+id/imgRecordatorio"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagen de la Tarea" />
+
+        <!-- Contenedor para la descripción de la tarea y fecha -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Título o descripción de la tarea -->
+            <TextView
+                android:id="@+id/tvDescripcionTarea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tarea"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <!-- Fecha de finalización -->
+            <TextView
+                android:id="@+id/tvFechaFinalizacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de Finalización"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+
+        <!-- Estado de la tarea -->
+        <CheckBox
+            android:id="@+id/checkTareaCompletada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completado"
+            android:layout_marginEnd="12dp"
+            />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
