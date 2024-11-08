@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.ai.client.generativeai.BuildConfig;
+import com.google.ai.client.generativeai.GenerativeModel;
+import com.google.ai.client.generativeai.java.GenerativeModelFutures;
+import com.google.ai.client.generativeai.type.Content;
+import com.google.ai.client.generativeai.type.GenerateContentResponse;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,23 +35,28 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
-public class Informacion extends AppCompatActivity {
+
+public class Informacion extends AppCompatActivity implements PlantAdapter2.OnPlantClickListener {
 
     private Spinner spinnerPreguntas;
     private Button btnEnviarPregunta;
     private RecyclerView recyclerView;
-    private PlantAdapter plantAdapter;
+    private PlantAdapter2 plantAdapter; // Cambiado a PlantAdapter2
     private List<Plant> plantList;
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
+    private Plant selectedPlant; // Variable para guardar la planta seleccionada
+    private TextView respuestaIA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion);
 
-        // Configuracion Firebase Auth y referencia de base de datos
+        // Configuración de Firebase Auth y referencia de base de datos
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -51,16 +65,15 @@ public class Informacion extends AppCompatActivity {
         }
 
         ImageButton btnRegresarPrincipal = findViewById(R.id.regresar);
+        FloatingActionButton fabAddPlant = findViewById(R.id.fab_add_plant);
 
         // Listener para el botón de regresar
         btnRegresarPrincipal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Esto cierra la actividad actual y regresa a la anterior
+                finish(); // Cierra la actividad y regresa a la anterior
             }
         });
-
-        FloatingActionButton fabAddPlant = findViewById(R.id.fab_add_plant);
 
         // Listener para el botón flotante que lleva a la actividad AgregarPlanta
         fabAddPlant.setOnClickListener(new View.OnClickListener() {
@@ -71,12 +84,11 @@ public class Informacion extends AppCompatActivity {
             }
         });
 
-
         // Inicializar RecyclerView y lista de plantas
         recyclerView = findViewById(R.id.recycler_plantas_horizontal);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         plantList = new ArrayList<>();
-        plantAdapter = new PlantAdapter(this, plantList);
+        plantAdapter = new PlantAdapter2(this, plantList, this); // Usar PlantAdapter2 con el listener
         recyclerView.setAdapter(plantAdapter);
 
         // Inicializar Spinner usando el string-array desde strings.xml
@@ -85,14 +97,20 @@ public class Informacion extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPreguntas.setAdapter(adapter);
 
+        //inicializar respuesta ia
+        respuestaIA = findViewById(R.id.respuesta_IA);
+
         // Configurar botón de enviar pregunta
         btnEnviarPregunta = findViewById(R.id.btn_enviar_pregunta);
         btnEnviarPregunta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String preguntaSeleccionada = spinnerPreguntas.getSelectedItem().toString();
-                Toast.makeText(Informacion.this, "Pregunta seleccionada: " + preguntaSeleccionada, Toast.LENGTH_SHORT).show();
-                // Aquí se maneja la acción para la pregunta seleccionada
+                if (selectedPlant != null) {
+                    String preguntaSeleccionada = spinnerPreguntas.getSelectedItem().toString();
+                    generarTextoConIA(preguntaSeleccionada, selectedPlant);  // Llamar a la función con la pregunta y la planta
+                } else {
+                    Toast.makeText(Informacion.this, "Selecciona una planta primero", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -100,16 +118,22 @@ public class Informacion extends AppCompatActivity {
         loadPlantData();
     }
 
+    // Implementa el método de la interfaz para manejar clics
+    @Override
+    public void onPlantClick(Plant plant) {
+        selectedPlant = plant; // Guardar la planta seleccionada
+        Toast.makeText(this, "Planta seleccionada: " + plant.getName(), Toast.LENGTH_SHORT).show();
+    }
+
+    // Método para cargar datos de plantas desde Firebase
     private void loadPlantData() {
         if (databaseReference != null) {
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                public void onDataChange(DataSnapshot snapshot) {
                     plantList.clear(); // Limpiar la lista antes de llenarla
                     for (DataSnapshot plantSnapshot : snapshot.getChildren()) {
-                        // Obtener el ID de la planta
                         String plantId = plantSnapshot.getKey();
-                        // Obtener otros campos
                         String date = plantSnapshot.child("date").getValue(String.class);
                         String description = plantSnapshot.child("description").getValue(String.class);
                         String family = plantSnapshot.child("family").getValue(String.class);
@@ -117,19 +141,62 @@ public class Informacion extends AppCompatActivity {
                         String name = plantSnapshot.child("name").getValue(String.class);
                         int quantity = plantSnapshot.child("quantity").getValue(Integer.class);
 
-                        // Crear una instancia de Plant
                         Plant plant = new Plant(plantId, date, description, family, imageUrl, name, quantity);
-                        // Agregar la planta a la lista
                         plantList.add(plant);
                     }
                     plantAdapter.notifyDataSetChanged(); // Notificar al adaptador que los datos han cambiado
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                public void onCancelled(DatabaseError error) {
                     Toast.makeText(Informacion.this, "Error al cargar las plantas.", Toast.LENGTH_SHORT).show();
                 }
             });
         }
+    }
+
+    // Método para generar la respuesta con la IA
+    private void generarTextoConIA(String pregunta, Plant selectedPlant) {
+        // Preparar los datos de la planta para enviar a la IA
+        String plantInfo = "Planta: " + selectedPlant.getName() + "\n" +
+                "Descripción: " + selectedPlant.getDescription() + "\n" +
+                "Familia: " + selectedPlant.getFamily() + "\n" +
+                "Cantidad: " + selectedPlant.getQuantity();
+
+        // Construir el texto completo para la IA
+        String prompt = "Pregunta: " + pregunta + "\n" + plantInfo;
+
+        // Inicializar el modelo generativo de Gemini
+        GenerativeModel gm = new GenerativeModel("gemini-1.5-flash", "API_KEY");
+        GenerativeModelFutures model = GenerativeModelFutures.from(gm);
+
+        Content content = new Content.Builder()
+                .addText(prompt)
+                .build();
+
+        // Usar un Executor para manejar el hilo
+        Executor executor = Executors.newSingleThreadExecutor();
+
+        ListenableFuture<GenerateContentResponse> response = model.generateContent(content);
+
+        // Manejar la respuesta de manera asincrónica
+        Futures.addCallback(response, new FutureCallback<GenerateContentResponse>() {
+            @Override
+            public void onSuccess(GenerateContentResponse result) {
+                String resultText = result.getText();
+
+                // Actualiza el TextView con el resultado de la IA
+                runOnUiThread(() -> {
+                    respuestaIA.setText(resultText);  // Muestra la respuesta en el TextView
+                });
+            }
+
+
+            @Override
+            public void onFailure(Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(Informacion.this, "Error al generar la respuesta.", Toast.LENGTH_SHORT).show();
+            }
+        }, executor);
     }
 }
