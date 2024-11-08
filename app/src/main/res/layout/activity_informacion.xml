@@ -54,7 +54,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_plantas_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:clipToPadding="false"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -63,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="26dp"
-        tools:listitem="@layout/item_plant" />
+        tools:listitem="@layout/item_plant2" />
 
 
     <!-- Layout horizontal para el Spinner y el botón Enviar -->
