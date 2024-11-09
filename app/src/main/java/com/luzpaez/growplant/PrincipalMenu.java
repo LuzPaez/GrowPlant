@@ -1,7 +1,5 @@
 package com.luzpaez.growplant;
 
-import static com.luzpaez.growplant.R.id.IrRegistroPlantasHome;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +27,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class PrincipalMenu extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class PrincipalMenu extends AppCompatActivity implements TaskAdapter.OnTaskCheckChangeListener{
 
     private ImageView fotoperfil;
     private TextView nombreHuertero;
@@ -34,6 +38,14 @@ public class PrincipalMenu extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference userRef;
     private StorageReference storageRef;
+    private DatabaseReference taskRef;
+
+    private RecyclerView rvTareasPendientes;
+    private TaskAdapter taskAdapter;
+    private ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> completedTaskList = new ArrayList<>();
+    private TaskAdapter completedTaskAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +54,31 @@ public class PrincipalMenu extends AppCompatActivity {
 
         // Inicializar Firebase
         auth = FirebaseAuth.getInstance();
+        String userId = auth.getCurrentUser().getUid();
         userRef = FirebaseDatabase.getInstance().getReference("users").child(auth.getCurrentUser().getUid());
+        taskRef = FirebaseDatabase.getInstance().getReference("recordatorios").child(userId).child("tasks");
         storageRef = FirebaseStorage.getInstance().getReference();
+
 
         // Inicializar vistas
         fotoperfil = findViewById(R.id.fotoperfil);
         nombreHuertero = findViewById(R.id.nombreHuertero);
         btnSalir = findViewById(R.id.SalirApp);
 
+        // Configuración del  RecyclerView
+
+        rvTareasPendientes = findViewById(R.id.rvListaTareas);
+        rvTareasPendientes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        rvTareasPendientes.setLayoutManager(new LinearLayoutManager(this));
+        taskAdapter = new TaskAdapter(this, taskList, this);
+        rvTareasPendientes.setAdapter(taskAdapter);
+
         // Actualizar imagen y nombre de usuario
         cargarDatosUsuario();
+
+        // Cargar tareas
+        loadTasks();
 
         // Botón para redirigir a la actividad de configuración
         CardView cardConfiguracion = findViewById(R.id.IrConfiguración);
@@ -93,15 +120,20 @@ public class PrincipalMenu extends AppCompatActivity {
             }
         });
 
-        // Botón para redirigir a la actividad de Recordatorio_(Cambiar IrRecursos cuando se cree, IrRecordatorios)
-        CardView cardRecordatorio = findViewById(R.id.IrRecursos);
-        cardRecordatorio.setOnClickListener(new View.OnClickListener() {
+        // Botón para redirigir a la actividad de Recordatorio
+
+        CardView cardRecordatorios = findViewById(R.id.IrRecordatorios);
+        cardRecordatorios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PrincipalMenu.this, RecordatoriosActivity.class);
                 startActivity(intent);
             }
         });
+
+
+        //agregar boton de recursos
+
         // Botón para salir de la aplicación
         btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +186,55 @@ public class PrincipalMenu extends AppCompatActivity {
         });
     }
 
+    private void loadTasks() {
+        taskRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                taskList.clear(); // Limpiar la lista antes de cargar los nuevos datos
+                for (DataSnapshot taskSnapshot : snapshot.getChildren()) {
+                    String taskId = taskSnapshot.getKey();
+                    String plantName = taskSnapshot.child("plantName").getValue(String.class);
+                    String taskDescription = taskSnapshot.child("taskDescription").getValue(String.class);
+                    String dueDate = taskSnapshot.child("dueDate").getValue(String.class);
+                    String imageUrl = taskSnapshot.child("imageUrl").getValue(String.class);
+                    boolean isCompleted = Boolean.TRUE.equals(taskSnapshot.child("isCompleted").getValue(Boolean.class));
+
+                    // Solo agregar tareas no completadas a la lista
+                    if (!isCompleted) {
+                        Task task = new Task(taskId, plantName, taskDescription, dueDate, imageUrl, isCompleted);
+                        taskList.add(task);
+                    }
+                }
+                taskAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(PrincipalMenu.this, "Error al cargar las tareas.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    @Override
+    public void onTaskCheckChange(Task task, boolean isChecked) {
+        taskRef.child(task.getId()).child("isCompleted").setValue(isChecked)
+                .addOnCompleteListener(taskUpdate -> {
+                    if (taskUpdate.isSuccessful()) {
+                        Toast.makeText(this, "Estado de tarea actualizado", Toast.LENGTH_SHORT).show();
+
+                        // Si la tarea se completó, elimínala de la lista local
+                        if (isChecked) {
+                            taskList.remove(task);
+                            taskAdapter.notifyDataSetChanged();
+                        }
+                    } else {
+                        Toast.makeText(this, "Error al actualizar el estado de la tarea", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
     // Método para mostrar un diálogo de confirmación antes de cerrar sesión
     private void mostrarConfirmacionSalir() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -176,7 +257,6 @@ public class PrincipalMenu extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
-
     // Método para evitar que la aplicación se cierre al presionar el botón de atrás
     @Override
     public void onBackPressed() {
