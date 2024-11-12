@@ -10,7 +10,7 @@
     <string name="confirmar_constrase_a">Confirmar Constraseña</string>
     <string name="registrarse">Registrarse</string>
     <string name="ya_tienes_cuenta_iniciar_sesi_n"><u>¿Ya tienes cuenta? Iniciar Sesión</u></string>
-    <string name="confirmacion_term_condiciones">Al hacer clic en registrarse, confirmo que acepto nuestros términos y condiciones</string>
+    <string name="confirmacion_term_condiciones">Al hacer clic en registrarse, confirma que acepta nuestra política de privacidad</string>
     <string name="image_desc_1">configuracion icono</string>
     <string name="image_desc_2">registro plantas icono</string>
     <string name="image_desc_3">estadisticas icono</string>
@@ -39,4 +39,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bot_n_regresar">Botón Regresar</string>
+    <string name="reg_strate_para_gestionar_tus_plantas_eficientemente">Regístrate para gestionar tus plantas eficientemente</string>
+    <string name="crear_una_cuenta">Crear una cuenta</string>
+    <string name="ingresa_tu_nombre">Ingresa tu nombre</string>
 </resources>
