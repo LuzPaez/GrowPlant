@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="#FFAB00"/> <!-- Primer color de fondo -->
+        </shape>
+    </item>
+    <!-- Fondo curvado -->
+    <item>
+        <shape>
+            <solid android:color="@color/segundoAzul"/> <!-- Color de fondo, puedes cambiarlo -->
+            <corners android:bottomLeftRadius="700dp" android:bottomRightRadius="00dp"/> <!-- Bordes inferiores curvados -->
+        </shape>
+    </item>
+
+</layer-list>

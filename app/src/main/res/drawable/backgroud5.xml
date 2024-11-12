@@ -1,0 +1,20 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Imagen en la parte superior -->
+    <item>
+        <bitmap
+            android:src="@drawable/imgplanta3"
+            android:gravity="fill"
+            android:top="0dp"
+            android:left="0dp"
+            android:right="0dp"
+            android:bottom="0dp" />
+    </item>
+
+    <!-- Fondo de color sólido en la parte inferior -->
+    <item android:top="0dp">
+        <shape>
+            <solid android:color="#C21A5B7B"/>
+
+        </shape>
+    </item>
+</layer-list>
