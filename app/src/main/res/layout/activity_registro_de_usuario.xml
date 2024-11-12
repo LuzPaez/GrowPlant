@@ -7,7 +7,7 @@
     tools:context=".RegistroDeUsuario"
     android:padding="16dp"
     android:theme="@style/Base.Theme.GrowPlant"
-    android:background="@drawable/fondo1">
+    android:background="@drawable/backgroud1">
 
     <!-- Elementos fijos: ImageView y los dos primeros TextViews -->
     <ImageView
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="56dp"/>
 
     <TextView
         android:id="@+id/textView1"
@@ -32,14 +32,15 @@
         app:layout_constraintTop_toBottomOf="@id/imgLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"/>
+        android:textColor="@color/white"
+        />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="40dp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/creatodisplaymedium"
         android:text="@string/reg_strate_para_gestionar_tus_plantas_eficientemente"
         android:textAlignment="center"
@@ -59,7 +60,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2">
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -185,7 +187,7 @@
                 android:layout_height="50sp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/azul"
+                android:backgroundTint="@color/segundoAzul"
                 android:elevation="8dp"
                 android:fontFamily="@font/creatodisplaybold"
                 android:text="@string/registrarse"

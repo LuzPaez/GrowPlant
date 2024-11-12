@@ -7,7 +7,9 @@
     tools:context=".LoginActivity"
     android:padding="16dp"
     android:theme="@style/Base.Theme.GrowPlant"
-    android:background="@drawable/fondo1">
+    android:background="@drawable/backgroud1"
+    >
+
 
     <!-- Elementos fijos: ImageView y los dos primeros TextViews -->
     <ImageView
@@ -19,7 +21,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="56dp"
+        />
 
     <TextView
         android:id="@+id/textView1"
@@ -29,10 +32,12 @@
         android:fontFamily="@font/creatodisplaybold"
         android:textSize="44sp"
         android:textAlignment="center"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/imgLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"/>
+
+        />
 
     <TextView
         android:id="@+id/textView2"
@@ -46,7 +51,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="40dp"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="2dp"
+        android:textColor="@color/white"
+
+    />
 
     <!-- Elementos desplazables: Contenidos dentro del ScrollView -->
     <ScrollView
@@ -59,6 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:fillViewport="true"
         android:background="@drawable/rounded_corner"
+        android:padding="20dp"
         >
 
         <LinearLayout
@@ -123,7 +132,7 @@
                 android:textSize="20sp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/azul"
+                android:backgroundTint="@color/segundoAzul"
                 android:elevation="8dp"/>
         </LinearLayout>
     </ScrollView>
