@@ -25,7 +25,7 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crear una cuenta"
+        android:text="@string/crear_una_cuenta"
         android:fontFamily="@font/creatodisplaybold"
         android:textSize="44sp"
         android:textAlignment="center"
@@ -41,7 +41,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="40dp"
         android:fontFamily="@font/creatodisplaymedium"
-        android:text="Regístrate para gestionar tus plantas eficientemente"
+        android:text="@string/reg_strate_para_gestionar_tus_plantas_eficientemente"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
@@ -79,7 +79,7 @@
                     android:id="@+id/nombreusuario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ingresa tu nombre"
+                    android:hint="@string/ingresa_tu_nombre"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -140,11 +140,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="28dp" />
 
-            <CheckBox
-                android:id="@+id/termsCheckBox"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/confirmacion_term_condiciones" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="8dp">
+
+                <!-- CheckBox sin texto -->
+                <CheckBox
+                    android:id="@+id/termsCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <!-- Texto separado del CheckBox -->
+                <TextView
+                    android:id="@+id/termsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/confirmacion_term_condiciones"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textColor="@color/azul"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
 
             <Space
                 android:layout_width="wrap_content"
