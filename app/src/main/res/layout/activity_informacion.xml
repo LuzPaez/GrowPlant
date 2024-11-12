@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/fondo2"
+    android:background="@drawable/backgroud4"
     tools:context=".Informacion">
 
     <!-- Botón de regreso -->
@@ -47,73 +47,100 @@
         app:layout_constraintTop_toBottomOf="@id/iconRegistroPlantas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        />
+        android:layout_marginTop="8dp" />
 
-    <!-- RecyclerView en horizontal para mostrar plantas -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_plantas_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:clipToPadding="false"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:orientation="horizontal"
+    <!-- Contenedor de desplazamiento -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:padding="5dp"
         app:layout_constraintTop_toBottomOf="@id/titulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="26dp"
-        tools:listitem="@layout/item_plant2" />
+        app:layout_constraintBottom_toTopOf="@id/fab_add_plant">
 
-
-    <!-- Layout horizontal para el Spinner y el botón Enviar -->
-    <LinearLayout
-        android:id="@+id/contenedor_pregunta_enviar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        app:layout_constraintTop_toBottomOf="@id/recycler_plantas_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="56dp">
-
-        <!-- Spinner para seleccionar la pregunta -->
-        <Spinner
-            android:id="@+id/spinner_preguntas"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/azul" />
-
-        <!-- Botón para enviar la pregunta seleccionada -->
-        <Button
-            android:id="@+id/btn_enviar_pregunta"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enviar"
-            android:backgroundTint="@color/azul"
-            android:textColor="@android:color/white"
-            android:layout_marginStart="8dp" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@drawable/rounded_corner">
 
+            <TextView
+                android:id="@+id/txt_informaciontexto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aquí encontrarás la información de tu planta: Elige una imagen y una pregunta, y envíala para recibir una respuesta."
+                android:textSize="16sp"
+                android:textColor="@color/azul"
+                android:gravity="center"
+                android:layout_marginTop="20dp" />
 
+            <!-- RecyclerView en horizontal para mostrar plantas -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_plantas_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="26dp"
+                tools:listitem="@layout/item_plant2" />
 
-    <!-- Sección para mostrar respuesta de la inteligencia artificial -->
-    <TextView
-        android:id="@+id/respuesta_IA"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Aquí se mostrará la información sobre la planta seleccionada."
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:background="@color/white"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/contenedor_pregunta_enviar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="36dp"
-        android:layout_marginBottom="8dp" />
+            <TextView
+                android:id="@+id/txt_informaciontexto2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona una pregunta"
+                android:textSize="16sp"
+                android:textColor="@color/azul"
+                android:gravity="center"
+                android:layout_marginTop="20dp" />
+
+            <!-- Layout horizontal para el Spinner y el botón Enviar -->
+            <LinearLayout
+                android:id="@+id/contenedor_pregunta_enviar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp">
+
+                <!-- Spinner para seleccionar la pregunta -->
+                <Spinner
+                    android:id="@+id/spinner_preguntas"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/searchview_background" />
+
+                <!-- Botón para enviar la pregunta seleccionada -->
+                <Button
+                    android:id="@+id/btn_enviar_pregunta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enviar"
+                    android:backgroundTint="@color/azul"
+                    android:textColor="@android:color/white"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <!-- Sección para mostrar respuesta de la inteligencia artificial -->
+            <TextView
+                android:id="@+id/respuesta_IA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aquí se mostrará la información sobre la planta seleccionada."
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+    </ScrollView>
 
     <!-- Botón flotante para agregar una planta -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -123,9 +150,9 @@
         android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/azul"
+        android:backgroundTint="#15B7BF"
         android:layout_margin="16dp"
-        app:tint="@android:color/white"
+        app:tint="@color/azul"
         android:contentDescription="agregar"
         app:fabSize="normal"
         app:fabCustomSize="70dp"

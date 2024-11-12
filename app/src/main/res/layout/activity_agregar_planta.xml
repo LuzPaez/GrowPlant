@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/fondo2">
+    android:background="@drawable/backgroud4">
 
     <!-- Botón de regreso -->
     <ImageButton
@@ -59,21 +59,45 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner"
+            android:padding="20dp"
+            android:layout_marginTop="12dp">
+
+            <!-- Texto de selección de imagen de perfil -->
+            <TextView
+                android:id="@+id/texto_camara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:text="Toca la imagen para buscar una planta"
+                android:textSize="18sp"
+                android:textColor="@color/azul"
+                android:gravity="center"
+                android:background="@drawable/rounded_corner"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
 
             <!-- Imagen de la planta -->
+
+            <!-- Botones de seleccionar y analizar en la misma fila -->
             <ImageView
                 android:id="@+id/plantImageView"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/fotocamara"
                 android:scaleType="centerCrop"
-                android:background="@color/azul"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/texto_camara"
+                 />
 
-            <!-- Botones de seleccionar y analizar en la misma fila -->
             <Button
                 android:id="@+id/selectImageButton"
                 android:layout_width="0dp"
@@ -135,6 +159,7 @@
                 android:id="@+id/plantDescriptionTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textSize="20sp"
                 app:layout_constraintTop_toBottomOf="@id/plantDescriptionHeaderTextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -156,13 +181,24 @@
                 android:id="@+id/plantFamilyTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="italic"
                 app:layout_constraintTop_toBottomOf="@id/plantFamilyHeaderTextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="8dp" />
 
+            <!-- Fecha de registro de la planta -->
+            <TextView
+                android:id="@+id/plantRegisterDateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de registro de la Planta"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/plantFamilyTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp" />
             <!-- Fecha -->
             <EditText
                 android:id="@+id/plantDateEditText"
@@ -170,22 +206,35 @@
                 android:layout_height="50dp"
                 android:hint="Fecha (YYYY-MM-DD)"
                 android:enabled="false"
-                app:layout_constraintTop_toBottomOf="@id/plantFamilyTextView"
+                app:layout_constraintTop_toBottomOf="@id/plantRegisterDateTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="28dp" />
+                android:layout_marginTop="8dp" />
+
+            <!-- Fecha de registro de la planta -->
+            <TextView
+                android:id="@+id/plantQuantityTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cantidad de plantas que posee"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/plantDateEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp" />
 
             <!-- Cantidad de plantas -->
+
             <EditText
                 android:id="@+id/plantQuantityEditText"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Ingrese la cantidad de plantas que tiene"
                 android:inputType="number"
-                app:layout_constraintTop_toBottomOf="@id/plantDateEditText"
+                app:layout_constraintTop_toBottomOf="@id/plantQuantityTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="28dp" />
+                android:layout_marginTop="8dp" />
 
             <!-- Botón Guardar -->
             <Button

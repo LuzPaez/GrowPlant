@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".Estadisticas"
-    android:background="@drawable/fondo2">
+    android:background="@drawable/backgroud6">
 
     <!-- Botón de regreso -->
     <ImageButton
@@ -66,25 +66,42 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/txt_grafica1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aquí podrás ver la familia de plantas que tienes y las fechas en las que guardaste más información"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_marginTop="20dp" />
+
             <!-- Gráfico de pastel -->
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/chart1"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginBottom="26dp" />
+                android:layout_marginBottom="26dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rounded_corner"/>
 
             <!-- Texto de la familia seleccionada -->
             <TextView
                 android:id="@+id/tvSelectedFamily"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Familia Seleccionada" />
+                android:text="Familia Seleccionada"
+                android:textSize="16sp"
+                android:textColor="@color/azul"
+                android:background="@color/white"
+                android:layout_marginBottom="20dp"/>
 
             <!-- Gráfico de barras -->
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="300dp"
+                android:background="@drawable/rounded_corner"/>
         </LinearLayout>
     </ScrollView>
 

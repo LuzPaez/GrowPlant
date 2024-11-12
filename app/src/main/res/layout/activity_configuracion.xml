@@ -4,83 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo1"
+    android:background="@drawable/backgroud3"
     android:padding="16dp"
-    tools:context=".Configuracion">
+    tools:context=".Configuracion"
+    >
 
-    <GridLayout
-        android:id="@+id/gridLa1"
+    <!-- Contenedor para el título, icono y botón de salida -->
+    <LinearLayout
+        android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="3"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="40dp"
-        >
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="35dp">
 
-        <!-- Primera fila -->
         <ImageButton
             android:id="@+id/regresar"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_gravity="bottom|center"
             android:background="@android:color/transparent"
-            android:contentDescription="salir de la app"
+            android:contentDescription="Salir de la app"
             android:scaleType="fitCenter"
-            android:src="@drawable/regresar"
-            />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_column="0" />
+            android:src="@drawable/regresar" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="58dp"
+            android:id="@+id/titulo"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="Configuración"
-            android:textSize="38sp"
             android:textColor="@color/white"
+            android:textSize="36sp"
             android:fontFamily="@font/creatodisplaybold"
-            android:gravity="center"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:layout_gravity="bottom|center"
-            android:layout_marginStart="12dp"
-            />
+            android:gravity="center" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_column="0" />
-
-        <!-- Segunda fila -->
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_column="2" />
-
-    </GridLayout>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/config_icon" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/fotoperfil"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_below="@id/gridLa1"
+        android:layout_below="@id/linear1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/fotoperfilpordefecto"
         android:background="@drawable/formacircular_pf_img"
         android:scaleType="centerCrop"
         android:clipToOutline="true"/>
 
+    <!-- Texto de selección de imagen de perfil -->
+    <TextView
+        android:id="@+id/texto_camara"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fotoperfil"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:text="Toca la imagen para cambiar la foto de perfil"
+        android:textSize="18sp"
+        android:textColor="@color/azul"
+        android:gravity="center"
+        android:background="@drawable/rounded_corner"
+        android:layout_marginBottom="12dp"
+        />
 
     <!-- Elementos desplazables: Contenidos dentro del ScrollView -->
 
@@ -88,8 +78,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/fotoperfil"
-        android:background="@drawable/rounded_corner">
+        android:layout_below="@id/texto_camara"
+        android:background="@drawable/rounded_corner"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,7 +91,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="40dp"
                 android:fontFamily="@font/creatodisplaymedium"
                 android:text="Aquí puedes actualizar tus datos"
@@ -191,6 +182,29 @@
                 android:layout_marginTop="42dp"
                 android:layout_marginBottom="32dp"
                 android:backgroundTint="@color/azul"
+                android:elevation="8dp"/>
+
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/creatodisplaymedium"
+                android:text="Aquí puedes eliminar tu cuenta. Ten en cuenta que esta acción eliminará toda tu información de forma permanente"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_EliminarCuenta"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:text="Eliminar Cuenta"
+                android:fontFamily="@font/creatodisplaybold"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="@color/rojo"
                 android:elevation="8dp"/>
 
         </LinearLayout>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".RegistroPlantasHome"
-    android:background="@drawable/fondo2">
+    android:background="@drawable/backgroud5">
 
 
     <!-- Botón de regreso -->
@@ -92,7 +92,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/azul"
         android:layout_margin="16dp"
-        app:tint="@android:color/white"
+        app:tint="@color/white"
         android:contentDescription="agregar"
         app:fabSize="normal"
         app:fabCustomSize="70dp"
