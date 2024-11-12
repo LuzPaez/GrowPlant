@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- WebView con Padding -->
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp" />
+
+    <!-- Botón flotante para regresar -->
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnRegresarRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@android:drawable/ic_menu_revert"
+        android:contentDescription="@string/bot_n_regresar"
+        android:backgroundTint="@color/azul"
+        app:tint="@android:color/white"
+        android:elevation="6dp"
+        android:padding="16dp"
+        android:focusable="true"
+        android:clickable="true"/>
+
+</RelativeLayout>
