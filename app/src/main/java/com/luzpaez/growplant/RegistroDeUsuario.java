@@ -1,6 +1,7 @@
 package com.luzpaez.growplant;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,6 +25,7 @@ public class RegistroDeUsuario extends AppCompatActivity {
     private CheckBox termsCheckBox;
     private DatabaseReference mDatabase;  // Referencia a la base de datos
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,16 @@ public class RegistroDeUsuario extends AppCompatActivity {
             Intent intent = new Intent(RegistroDeUsuario.this, LoginActivity.class);
             startActivity(intent);
         });
+
+        // Enlace para ir a la pantalla de politica
+        TextView linkToPolitic = findViewById(R.id.termsTextView);
+        linkToPolitic.setOnClickListener(v -> {
+            Intent intent = new Intent(RegistroDeUsuario.this, Politica.class);
+            startActivity(intent);
+        });
+
+        TextView termsTextView = findViewById(R.id.termsTextView);
+        termsTextView.setPaintFlags(termsTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         // Inicializar Firebase Auth y Firebase Database
         mAuth = FirebaseAuth.getInstance();
@@ -86,7 +98,10 @@ public class RegistroDeUsuario extends AppCompatActivity {
                         guardarNombreDeUsuario(userId, nombreUsuario);
 
                         Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
-                        // Aquí puedes redirigir a otra pantalla si lo deseas
+                        // Redirige a la pantalla de inicio de sesión
+                        Intent intent = new Intent(RegistroDeUsuario.this, LoginActivity.class);
+                        startActivity(intent);
+
                     } else {
                         Toast.makeText(this, "Error en el registro: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
