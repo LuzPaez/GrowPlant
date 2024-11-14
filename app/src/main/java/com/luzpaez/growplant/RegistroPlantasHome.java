@@ -2,7 +2,10 @@ package com.luzpaez.growplant;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -27,8 +30,11 @@ public class RegistroPlantasHome extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PlantAdapter plantAdapter;
     private List<Plant> plantList;  // Asegúrate de declarar plantList aquí
+    private List<Plant> originalPlantList;
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,14 +73,33 @@ public class RegistroPlantasHome extends AppCompatActivity {
 
         // Inicializar la lista de plantas
         plantList = new ArrayList<>();
+        originalPlantList = new ArrayList<>();
 
         // Configurar RecyclerView
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Inicializar PlantAdapter con plantList
-        plantAdapter = new PlantAdapter(this, plantList);
+        plantAdapter = new PlantAdapter(this, plantList ,originalPlantList);
         recyclerView.setAdapter(plantAdapter);
+
+
+        EditText searchEditText = findViewById(R.id.BarraBusqueda);
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                plantAdapter.filter(s.toString()); // Aplicar filtro mientras escribe
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
+
+
 
         // Cargar datos desde Firebase
         loadPlantData();
@@ -86,6 +111,7 @@ public class RegistroPlantasHome extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     plantList.clear(); // Limpiar la lista antes de llenarla
+                    originalPlantList.clear();
                     for (DataSnapshot plantSnapshot : snapshot.getChildren()) {
                         // Obtener el ID de la planta
                         String plantId = plantSnapshot.getKey();
@@ -101,6 +127,7 @@ public class RegistroPlantasHome extends AppCompatActivity {
                         Plant plant = new Plant(plantId, date, description, family, imageUrl, name, quantity);
                         // Agregar la planta a la lista
                         plantList.add(plant);
+                        originalPlantList.add(plant); // Copia también en la lista original
                     }
                     plantAdapter.notifyDataSetChanged(); // Notificar al adaptador que los datos han cambiado
                 }

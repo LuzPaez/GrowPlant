@@ -1,10 +1,12 @@
 package com.luzpaez.growplant;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -47,6 +49,18 @@ public class RecordatoriosActivity extends AppCompatActivity implements PlantAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordatorios);
+
+
+        ImageButton btnRegresarPrincipal = findViewById(R.id.regresar);
+
+        // Listener para el botón de regresar a la página principal
+        btnRegresarPrincipal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecordatoriosActivity.this, PrincipalMenu.class);
+                startActivity(intent);
+            }
+        });
 
         // Inicializar la referencia a la base de datos
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
