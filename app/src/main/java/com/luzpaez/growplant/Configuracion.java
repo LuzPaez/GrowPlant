@@ -1,11 +1,13 @@
 package com.luzpaez.growplant;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -109,6 +111,15 @@ public class Configuracion extends AppCompatActivity {
                 }
             }
         });
+
+        Button btnEliminarCuenta = findViewById(R.id.btn_EliminarCuenta);
+        btnEliminarCuenta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eliminarCuenta();
+            }
+        });
+
     }
 
     // Método para cargar la imagen de perfil desde Firebase
@@ -262,4 +273,106 @@ public class Configuracion extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+
+    private void eliminarCuenta() {
+        // Mostrar un diálogo de confirmación
+        new AlertDialog.Builder(Configuracion.this)
+                .setTitle("Confirmar eliminación")
+                .setMessage("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Si el usuario confirma, procedemos a eliminar la cuenta
+
+                        String userId = auth.getCurrentUser().getUid();
+
+                        // Eliminar datos de usuario en Firebase Database (nodo 'users')
+                        databaseReference.child(userId).removeValue()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d("FirebaseDB", "Datos de usuario eliminados correctamente.");
+                                        } else {
+                                            Log.e("FirebaseDB", "Error al eliminar los datos de usuario: ", task.getException());
+                                        }
+                                    }
+                                });
+
+                        // Eliminar las plantas del usuario en el nodo 'plants'
+                        DatabaseReference plantsReference = FirebaseDatabase.getInstance().getReference("plants").child(userId);
+                        plantsReference.removeValue()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d("FirebaseDB", "Plantas del usuario eliminadas correctamente.");
+                                        } else {
+                                            Log.e("FirebaseDB", "Error al eliminar las plantas del usuario: ", task.getException());
+                                        }
+                                    }
+                                });
+
+                        // Eliminar recordatorios del usuario en el nodo 'recordatorios'
+                        DatabaseReference recordatoriosReference = FirebaseDatabase.getInstance().getReference("recordatorios").child(userId);
+                        recordatoriosReference.removeValue()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d("FirebaseDB", "Recordatorios del usuario eliminados correctamente.");
+                                        } else {
+                                            Log.e("FirebaseDB", "Error al eliminar los recordatorios del usuario: ", task.getException());
+                                        }
+                                    }
+                                });
+
+                        // Eliminar imagen de perfil en Firebase Storage
+                        StorageReference imageRef = FirebaseStorage.getInstance().getReference("profile_pics").child(userId + ".jpg");
+                        imageRef.delete()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d("FirebaseStorage", "Imagen de perfil eliminada correctamente.");
+                                        } else {
+                                            Log.e("FirebaseStorage", "Error al eliminar la imagen de perfil: ", task.getException());
+                                        }
+                                    }
+                                });
+
+                        // Eliminar la cuenta del usuario en Firebase Authentication
+                        auth.getCurrentUser().delete()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d("FirebaseAuth", "Cuenta eliminada correctamente.");
+                                            // Mostrar el diálogo de agradecimiento
+                                            new AlertDialog.Builder(Configuracion.this)
+                                                    .setTitle("¡Gracias!")
+                                                    .setMessage("Gracias por usar nuestra aplicación. Tu cuenta ha sido eliminada.")
+                                                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            // Redirigir al login o a una actividad final
+                                                            Intent intent = new Intent(Configuracion.this, LoginActivity.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                        }
+                                                    })
+                                                    .show();
+                                        } else {
+                                            Log.e("FirebaseAuth", "Error al eliminar la cuenta: ", task.getException());
+                                        }
+                                    }
+                                });
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+
 }
