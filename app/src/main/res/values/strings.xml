@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GrowPlant</string>
     <string name="iniciar_sesi_n">Iniciar Sesión</string>
-    <string name="accede_para_gestionar_tus_plantas">Accede para gestionar tus plantas</string>
+    <string name="accede_para_gestionar_tus_plantas">Accede para explorar y cuidar tus plantas</string>
     <string name="ingresar_correo_electr_nico">Ingresa tu correo electrónico</string>
     <string name="ingresar_contrase_a">Ingresa tu contraseña</string>
     <string name="no_tienes_cuenta_registrate"><u>¿No tienes cuenta? Registrate</u></string>
@@ -40,7 +40,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bot_n_regresar">Botón Regresar</string>
-    <string name="reg_strate_para_gestionar_tus_plantas_eficientemente">Regístrate para gestionar tus plantas eficientemente</string>
+    <string name="reg_strate_para_gestionar_tus_plantas_eficientemente">Regístrate para conocer y cuidar tus plantas</string>
     <string name="crear_una_cuenta">Crear una cuenta</string>
     <string name="ingresa_tu_nombre">Ingresa tu nombre</string>
 </resources>
