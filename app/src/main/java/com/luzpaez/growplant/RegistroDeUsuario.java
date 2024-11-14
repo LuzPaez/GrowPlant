@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -25,7 +26,6 @@ public class RegistroDeUsuario extends AppCompatActivity {
     private CheckBox termsCheckBox;
     private DatabaseReference mDatabase;  // Referencia a la base de datos
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class RegistroDeUsuario extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Enlace para ir a la pantalla de politica
+        // Enlace para ir a la pantalla de política de privacidad
         TextView linkToPolitic = findViewById(R.id.termsTextView);
         linkToPolitic.setOnClickListener(v -> {
             Intent intent = new Intent(RegistroDeUsuario.this, Politica.class);
@@ -65,6 +65,7 @@ public class RegistroDeUsuario extends AppCompatActivity {
         });
     }
 
+
     private void registerUser() {
         String nombreUsuario = nombreusuarioInput.getText().toString();
         String email = emailInput.getText().toString();
@@ -72,17 +73,22 @@ public class RegistroDeUsuario extends AppCompatActivity {
         String confirmarContrasena = contrasenaInputAgain.getText().toString();
 
         if (TextUtils.isEmpty(nombreUsuario) || TextUtils.isEmpty(email) || TextUtils.isEmpty(contrasena) || TextUtils.isEmpty(confirmarContrasena)) {
-            Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            showDialog("Error", "Todos los campos son obligatorios");
             return;
         }
 
         if (!contrasena.equals(confirmarContrasena)) {
-            Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+            showDialog("Error", "Las contraseñas no coinciden");
             return;
         }
 
         if (!termsCheckBox.isChecked()) {
-            Toast.makeText(this, "Debes aceptar los términos y condiciones", Toast.LENGTH_SHORT).show();
+            showDialog("Error", "Debes aceptar los términos y condiciones");
+            return;
+        }
+
+        if (!isPasswordValid(contrasena)) {
+            showDialog("Error", "La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.");
             return;
         }
 
@@ -90,37 +96,39 @@ public class RegistroDeUsuario extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, contrasena)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // El registro fue exitoso
                         FirebaseUser user = mAuth.getCurrentUser();
                         String userId = user.getUid();
-
-                        // Guardar el nombre de usuario en la base de datos
                         guardarNombreDeUsuario(userId, nombreUsuario);
-
-                        Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
-                        // Redirige a la pantalla de inicio de sesión
+                        showDialog("Éxito", "Registro exitoso");
                         Intent intent = new Intent(RegistroDeUsuario.this, LoginActivity.class);
                         startActivity(intent);
-
                     } else {
-                        Toast.makeText(this, "Error en el registro: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        showDialog("Error", "Error en el registro: " + task.getException().getMessage());
                     }
                 });
     }
 
-    // Método para guardar el nombre de usuario en la base de datos
+    private boolean isPasswordValid(String password) {
+        String passwordPattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        return password.matches(passwordPattern);
+    }
+
+    private void showDialog(String title, String message) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Aceptar", null)
+                .show();
+    }
+
     private void guardarNombreDeUsuario(String userId, String nombreUsuario) {
         mDatabase.child("users").child(userId).child("nombreUsuario").setValue(nombreUsuario)
-                .addOnCompleteListener(task -> {  //prueba para ver en en logcat si se esta guardando el usuario en db
+                .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Log.d("FirebaseDB", "Nombre de usuario guardado correctamente en la base de datos.");
                     } else {
                         Log.e("FirebaseDB", "Error al guardar en la base de datos: ", task.getException());
                     }
                 });
-
     }
-
-
 }
-

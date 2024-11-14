@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Enlace para ir a la pantalla de inicio de sesión
+        // Enlace para ir a la pantalla de registro
         TextView linkToLogin = findViewById(R.id.txt_enlace_registro);
         linkToLogin.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, RegistroDeUsuario.class);
@@ -42,11 +43,11 @@ public class LoginActivity extends AppCompatActivity {
         String contrasena = contrasenaInput.getText().toString();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(contrasena)) {
-            Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            showDialog("Error", "Todos los campos son obligatorios");
             return;
         }
 
-// Iniciar sesión en Firebase
+        // Iniciar sesión en Firebase
         mAuth.signInWithEmailAndPassword(email, contrasena)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -58,9 +59,16 @@ public class LoginActivity extends AppCompatActivity {
                             finish(); // Cierra la actividad de login
                         }
                     } else {
-                        Toast.makeText(this, "Error al iniciar sesión: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        showDialog("Error", "Error al iniciar sesión: " + task.getException().getMessage());
                     }
                 });
+    }
 
+    private void showDialog(String title, String message) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Aceptar", (dialog, which) -> dialog.dismiss())
+                .show();
     }
 }
