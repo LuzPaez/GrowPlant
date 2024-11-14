@@ -2,6 +2,7 @@ package com.luzpaez.growplant;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +11,37 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHolder> {
-
     private Context context;
     private List<Plant> plantList;
+    private List<Plant> originalPlantList; // Lista principal para restaurar datos
 
-    public PlantAdapter(Context context, List<Plant> plantList) {
+    public PlantAdapter(Context context, List<Plant> plantList, List<Plant> originalPlantList) {
         this.context = context;
         this.plantList = plantList;
+        this.originalPlantList = originalPlantList;
+    }
+
+
+    // Método de filtrado
+    public void filter(String text) {
+        plantList.clear(); // Limpiar plantList para aplicar el filtro
+        if (text.isEmpty()) {
+            plantList.addAll(originalPlantList); // Restaurar todos los datos si no hay texto
+        } else {
+            for (Plant plant : originalPlantList) {
+                if (plant.getDescription().toLowerCase().contains(text.toLowerCase())) {
+                    plantList.add(plant);
+                }
+            }
+        }
+
+        Log.d("PlantAdapter", "Filtered list size: " + plantList.size());
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -36,21 +58,14 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.PlantViewHol
         holder.tvNombre.setText(plant.getDescription());
         holder.tvFamilia.setText(plant.getFamily());
 
-        // Cargar la imagen desde la URL con Glide
         Glide.with(context)
                 .load(plant.getImageUrl())
                 .into(holder.ivPlanta);
 
-        // Establecer un OnClickListener en el CardView
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Crear un Intent para la actividad DetallesPlanta
-                Intent intent = new Intent(context, DetallesPlanta.class);
-                // Pasar el objeto Plant al DetallesPlanta
-                intent.putExtra("plant_key", (Parcelable) plant); // Plant implementa Parcelable o Serializable
-                context.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetallesPlanta.class);
+            intent.putExtra("plant_key", (Parcelable) plant);
+            context.startActivity(intent);
         });
     }
 
