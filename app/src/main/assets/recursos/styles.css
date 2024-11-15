@@ -1,0 +1,252 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f4f4f9;
+    animation: fadeIn 1s ease-in;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    animation: slideUp 1s ease-out;
+}
+
+/* Contenedor del logo */
+.logo-container {
+    text-align: center; /* Centra el logo */
+    margin-bottom: 20px; /* Espacio debajo del logo */
+}
+
+/* Estilo para la imagen del logo */
+.logo {
+    max-width: 100%; /* Ajusta el logo al tamaño máximo del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-height: 100px; /* Limita la altura máxima a 150px (puedes ajustarlo según tu preferencia) */
+    opacity: 0;
+    animation: fadeIn 1s 1s forwards; /* Animación de aparición */
+}
+
+/* Banner para el título */
+h1 {
+    background-color: #022845;
+    color: white;
+    font-size: 2.5em;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: fadeInUp 1s 0.5s forwards;
+}
+
+/* Contenedor del título y el logo */
+.title-container {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    background-color: #022845;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s 0.5s forwards;
+}
+
+/* Estilo para el logo */
+.logo {
+    max-width: 100px;
+    max-height: 100px; 
+    width: auto; 
+    height: auto; 
+    margin-bottom: 15px; 
+    opacity: 0;
+    animation: fadeIn 1s 1s forwards;
+    image-rendering: crisp-edges; 
+}
+
+
+/* Estilo para el título */
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    margin: 0;
+    opacity: 0;
+    animation: fadeInUp 1s 0.5s forwards;
+}
+
+
+/* Subtítulos */
+h2 {
+    color:  #022845;
+    font-size: 1.8em;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid  #022845;
+    padding-bottom: 0.2em;
+    opacity: 0;
+    animation: fadeInUp 1s 1s forwards;
+}
+
+/* Texto */
+p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 1em;
+    text-align: justify;
+    opacity: 0;
+    animation: fadeInUp 1s 1.5s forwards;
+}
+
+/* Botones de navegación */
+.nav-button {
+    display: inline-block;
+    background: linear-gradient(90deg, #39FD81, #39FD39); /* Gradiente verde */
+    color:  #022845;
+    padding: 15px 25px;
+    margin: 10px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+    min-width: 150px;
+    max-width: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+    animation: fadeInUp 1s 2s forwards;
+}
+
+.nav-button:hover {
+    background: linear-gradient(90deg, #39FD39, #39FD81); /* Invertir el gradiente en hover */
+    transform: scale(1.05); /* Efecto de animación */
+}
+
+/* Estilo para el contenedor de botones (ajustar al ancho) */
+.nav-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInUp 1s 2s forwards;
+}
+
+/* Estilos para la imagen dentro del contenedor */
+.image-container {
+    max-width: 100%; 
+    text-align: center;
+    margin: 20px 0; 
+}
+
+.chapter-image {
+    max-width: 100%; 
+    height: auto; 
+    max-height: 600px; 
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    animation: fadeInZoom 1s ease-out; /* Añade la animación */
+    animation-delay: 0.5s; /* Espera de medio segundo antes de empezar */
+}
+
+
+/* Footer */
+.footer {
+    background-color: #022845; /* Fondo oscuro */
+    color: #ffffff; /* Texto blanco */
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9em;
+    margin-top: 40px;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s 3s forwards;
+}
+
+.footer p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.references-inline {
+    margin-top: 10px;
+    font-weight: normal;
+    font-style: italic;
+    color: #c0e1ff; /* Color suave */
+}
+
+.references-inline::before {
+    content: ""; /* Sin punto de lista */
+}
+
+
+/* Animaciones */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Animación para el efecto de aparición */
+@keyframes fadeInZoom {
+    0% {
+        opacity: 0;
+        transform: scale(0.8); /* Empieza con un tamaño un poco más pequeño */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1); /* Termina en el tamaño normal */
+    }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.6em;
+    }
+    p {
+        font-size: 1em;
+    }
+    .nav-button {
+        font-size: 1em;
+        padding: 12px 20px;
+        min-width: 120px;
+    }
+}
