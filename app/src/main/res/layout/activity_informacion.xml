@@ -24,7 +24,7 @@
 
     <!-- Imagen referente a la actividad -->
     <ImageView
-        android:id="@+id/iconRegistroPlantas"
+        android:id="@+id/iconInformacion"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:scaleType="centerCrop"
@@ -44,7 +44,7 @@
         android:textColor="@color/white"
         android:fontFamily="@font/creatodisplaybold"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/iconRegistroPlantas"
+        app:layout_constraintTop_toBottomOf="@id/iconInformacion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
