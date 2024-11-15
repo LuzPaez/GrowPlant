@@ -1,20 +1,23 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Imagen en la parte superior -->
     <item>
         <bitmap
-            android:src="@drawable/imgplanta3"
+            android:src="@drawable/imgplanta2"
             android:gravity="fill"
             android:top="0dp"
             android:left="0dp"
             android:right="0dp"
             android:bottom="0dp" />
     </item>
-
-    <!-- Fondo de color sólido en la parte inferior -->
-    <item android:top="0dp">
+    <item>
         <shape>
-            <solid android:color="#C21A5B7B"/>
-
+            <solid android:color="#8540FF00"/> <!-- Primer color de fondo -->
+        </shape>
+    </item>
+    <!-- Fondo curvado -->
+    <item>
+        <shape>
+            <solid android:color="#C0001A5C"/> <!-- Color de fondo -->
+            <corners android:bottomLeftRadius="700dp" android:bottomRightRadius="00dp"/> <!-- Bordes inferiores curvados -->
         </shape>
     </item>
 </layer-list>

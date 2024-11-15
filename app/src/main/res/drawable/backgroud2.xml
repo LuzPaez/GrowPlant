@@ -13,7 +13,7 @@
     <!-- Fondo de color sólido en la parte inferior -->
     <item android:bottom="670dp">
         <shape>
-            <solid android:color="@color/segundoAzul"/>
+            <solid android:color="#C0001A5C"/>
             <corners android:bottomLeftRadius="100dp" android:bottomRightRadius="100dp"/>
         </shape>
     </item>
@@ -21,7 +21,7 @@
     <!-- Fondo de color sólido en la parte inferior -->
     <item android:top="350dp">
         <shape>
-            <solid android:color="@color/segundoAzul"/>
+            <solid android:color="#C0001A5C"/>
             <corners android:topLeftRadius="100dp" android:topRightRadius="100dp"/>
         </shape>
     </item>

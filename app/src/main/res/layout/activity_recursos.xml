@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Recursos"
     android:background="@drawable/backgroud4"
+    android:padding="16dp"
     >
 
     <!-- Botón de regreso. -->

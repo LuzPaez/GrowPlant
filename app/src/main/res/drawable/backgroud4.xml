@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <bitmap
+            android:src="@drawable/imgplanta4"
+            android:gravity="fill"
+            android:top="0dp"
+            android:left="0dp"
+            android:right="0dp"
+            android:bottom="0dp" />
+    </item>
     <item>
         <shape>
-            <solid android:color="#15B8C1"/> <!-- Primer color de fondo -->
+            <solid android:color="#8540FF00"/> <!-- Primer color de fondo -->
         </shape>
     </item>
     <!-- Fondo curvado -->
     <item>
         <shape>
-            <solid android:color="@color/segundoAzul"/> <!-- Color de fondo, puedes cambiarlo -->
+            <solid android:color="#C0001A5C"/> <!-- Color de fondo -->
             <corners android:bottomLeftRadius="700dp" android:bottomRightRadius="00dp"/> <!-- Bordes inferiores curvados -->
         </shape>
     </item>
-
 </layer-list>

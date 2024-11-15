@@ -150,7 +150,7 @@
         android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="#15B7BF"
+        android:backgroundTint="#76FF03"
         android:layout_margin="16dp"
         app:tint="@color/azul"
         android:contentDescription="agregar"

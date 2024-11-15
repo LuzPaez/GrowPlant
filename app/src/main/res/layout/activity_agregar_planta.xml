@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="0dp"
-                android:text="Toca la imagen para buscar una planta"
+                android:text="Selecciona una imagen para buscar una planta"
                 android:textSize="18sp"
                 android:textColor="@color/azul"
                 android:gravity="center"
