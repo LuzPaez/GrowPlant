@@ -15,6 +15,7 @@
 
 
     <ImageView
+        android:id="@+id/logoSplash"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src = "@drawable/logo"
