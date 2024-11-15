@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewRecursos"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    android:padding="20dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <!-- Título de la plantilla -->
+        <TextView
+            android:id="@+id/plantTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Información general"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="10dp" />
+
+        <!-- ImageView para mostrar la imagen -->
+        <ImageView
+            android:id="@+id/plantImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop" />
+
+        <!-- Título de la plantilla -->
+        <TextView
+            android:id="@+id/recursonota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Visualizacion previa*"
+            android:textSize="13sp"
+            android:paddingBottom="10dp" />
+
+        <!-- WebView para mostrar el contenido -->
+        <android.webkit.WebView
+            android:id="@+id/plantWebView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
