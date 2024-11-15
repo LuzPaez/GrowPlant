@@ -8,7 +8,7 @@
     android:background="@drawable/backgroud4"
     >
 
-    <!-- Botón de regreso -->
+    <!-- Botón de regreso. -->
     <ImageButton
         android:id="@+id/regresar"
         android:layout_width="70dp"

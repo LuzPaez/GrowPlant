@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".DetalleRecursoActivity">
 
-    <!-- WebView para mostrar el contenido completo del HTML -->
+    <!-- WebView para mostrar el contenido completo del HTML. -->
     <android.webkit.WebView
         android:id="@+id/webViewDetalle"
         android:layout_width="0dp"

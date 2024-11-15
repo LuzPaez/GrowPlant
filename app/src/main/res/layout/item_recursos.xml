@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:padding="15dp">
 
-        <!-- Título de la plantilla -->
+        <!-- Título de la plantilla. -->
         <TextView
             android:id="@+id/plantTitle"
             android:layout_width="match_parent"
