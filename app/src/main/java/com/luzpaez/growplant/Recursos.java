@@ -66,7 +66,7 @@ public class Recursos extends AppCompatActivity {
         imageFiles.add("img/im1.jpeg");
         fileNames = new ArrayList<>();
 
-        // Agregar los datos: títulos y nombres de archivos HTML
+        // Agregar los datos: títulos, imagenes y nombres de archivos HTML
         titles.add("Capítulo I: Aspectos Generales de la Agricultura Urbana");
         imageFiles.add("img/im3.jpeg");
         fileNames.add("capitulo1_argriculturaurbana.html");

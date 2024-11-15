@@ -14,12 +14,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+
 public class RecursosAdapter extends RecyclerView.Adapter<RecursosAdapter.ViewHolder> {
 
     private List<String> titles; // Lista de títulos
