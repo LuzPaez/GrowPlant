@@ -1,5 +1,6 @@
 package com.luzpaez.growplant;
 
+import android.animation.ObjectAnimator;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -45,11 +47,26 @@ public class RecordatoriosActivity extends AppCompatActivity implements PlantAda
 
     private Plant plantaSeleccionada;
 
+    private ImageButton regresarButton;
+    private ImageView icono;
+    private TextView titulo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordatorios);
 
+        //animacion
+        regresarButton = findViewById(R.id.regresar);
+        icono = findViewById(R.id.iconRecordatorios);
+        titulo = findViewById(R.id.titulo);
+
+        // Animar el botón de regreso con desvanecimiento
+        fadeInButton(regresarButton, 500);  // Desvanecimiento del botón de regreso
+
+        // Animar el ícono y el título con desvanecimiento
+        animateElement(icono, 700, 0f, 1f);  // Desvanecimiento del ícono
+        animateElement(titulo, 900, 0f, 1f);  // Desvanecimiento del título
 
         ImageButton btnRegresarPrincipal = findViewById(R.id.regresar);
 
@@ -116,7 +133,21 @@ public class RecordatoriosActivity extends AppCompatActivity implements PlantAda
     }
 
 
+    // Método para animar el desvanecimiento del botón de regreso
+    private void fadeInButton(View view, long delay) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);  // Desvanecimiento desde invisible (0f) a visible (1f)
+        fadeIn.setStartDelay(delay);  // Retraso para la animación
+        fadeIn.setDuration(1000);  // Duración del desvanecimiento
+        fadeIn.start();
+    }
 
+    // Método genérico para animar el desvanecimiento (alpha) de otros elementos
+    private void animateElement(View view, long delay, float startAlpha, float endAlpha) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", startAlpha, endAlpha);
+        fadeIn.setStartDelay(delay);  // Retraso para la animación secuencial
+        fadeIn.setDuration(500); // Duración de la animación
+        fadeIn.start();
+    }
 
 
     @Override

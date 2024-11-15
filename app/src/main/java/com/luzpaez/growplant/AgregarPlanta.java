@@ -1,5 +1,6 @@
 package com.luzpaez.growplant;
 
+import android.animation.ObjectAnimator;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -54,6 +55,10 @@ public class AgregarPlanta extends AppCompatActivity {
     private Uri imageUri;
     private EditText plantDateEditText;
     private EditText plantQuantityEditText;
+    private ImageButton regresarButton;
+    private ImageView icono;
+    private TextView titulo;
+
 
     // Firebase variables
     private FirebaseAuth auth;
@@ -64,6 +69,19 @@ public class AgregarPlanta extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_planta);
+
+        //animacion
+        regresarButton = findViewById(R.id.backButton);
+        icono = findViewById(R.id.iconRegistroPlantas);
+        titulo = findViewById(R.id.titulo);
+
+        // Animar el botón de regreso con desvanecimiento
+        fadeInButton(regresarButton, 500);  // Desvanecimiento del botón de regreso
+
+        // Animar el ícono y el título con desvanecimiento
+        animateElement(icono, 700, 0f, 1f);  // Desvanecimiento del ícono
+        animateElement(titulo, 900, 0f, 1f);  // Desvanecimiento del título
+
 
         plantImageView = findViewById(R.id.plantImageView);
         plantNameTextView = findViewById(R.id.plantNameTextView);
@@ -102,6 +120,21 @@ public class AgregarPlanta extends AppCompatActivity {
         saveButton.setOnClickListener(v -> savePlantData()); // Llamar al método para guardar datos
 
         backButton.setOnClickListener(v -> finish()); // Regresar a la actividad anterior
+    }
+    // Método para animar el desvanecimiento del botón de regreso
+    private void fadeInButton(View view, long delay) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);  // Desvanecimiento desde invisible (0f) a visible (1f)
+        fadeIn.setStartDelay(delay);  // Retraso para la animación
+        fadeIn.setDuration(1000);  // Duración del desvanecimiento
+        fadeIn.start();
+    }
+
+    // Método genérico para animar el desvanecimiento (alpha) de otros elementos
+    private void animateElement(View view, long delay, float startAlpha, float endAlpha) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", startAlpha, endAlpha);
+        fadeIn.setStartDelay(delay);  // Retraso para la animación secuencial
+        fadeIn.setDuration(500); // Duración de la animación
+        fadeIn.start();
     }
 
     private void openGallery() {

@@ -1,5 +1,7 @@
 package com.luzpaez.growplant;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,37 @@ public class RegistroDeUsuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_de_usuario);
+
+        // ANIMACIONES
+// Referencias a los elementos del layout
+        ImageView imgLogo = findViewById(R.id.imgLogo);
+        TextView textView1 = findViewById(R.id.textView1);
+        TextView textView2 = findViewById(R.id.textView2);
+        Button btnRegistro = findViewById(R.id.btn_button_registrarse);
+
+// Animación para el logo (deslizar desde arriba)
+        ObjectAnimator logoAnimator = ObjectAnimator.ofFloat(imgLogo, "translationY", -1000f, 0f);
+        logoAnimator.setDuration(1000); // Duración de 1 segundo
+
+// Animación para textView1 (desvanecer)
+        ObjectAnimator textView1Animator = ObjectAnimator.ofFloat(textView1, "alpha", 0f, 1f);
+        textView1Animator.setDuration(1000); // Duración de 1 segundo
+
+// Animación para textView2 (desvanecer)
+        ObjectAnimator textView2Animator = ObjectAnimator.ofFloat(textView2, "alpha", 0f, 1f);
+        textView2Animator.setDuration(1000); // Duración de 1 segundo
+
+// Animación para el botón de registrarse (desvanecer)
+        ObjectAnimator btnAnimator = ObjectAnimator.ofFloat(btnRegistro, "alpha", 0f, 1f);
+        btnAnimator.setDuration(1000); // Duración de 1 segundo
+
+// Combinamos las animaciones en un AnimatorSet para que se reproduzcan juntas
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(logoAnimator, textView1Animator, textView2Animator, btnAnimator);
+
+// Iniciamos las animaciones
+        animatorSet.start();
+
 
         // Enlace para ir a la pantalla de inicio de sesión
         TextView linkToLogin = findViewById(R.id.txt_enlace_iniciosesion);

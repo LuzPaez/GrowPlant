@@ -1,6 +1,7 @@
 package com.luzpaez.growplant;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +15,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.annotation.NonNull;
@@ -45,10 +47,27 @@ public class Configuracion extends AppCompatActivity {
     private static final int STORAGE_PERMISSION_CODE = 100;
     private Uri imageUri;
 
+    private ImageButton regresarButton;
+    private ImageView icono;
+    private TextView titulo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
+
+        //animacion
+        regresarButton = findViewById(R.id.regresar);
+        icono = findViewById(R.id.iconConfig);
+        titulo = findViewById(R.id.titulo);
+
+        // Animar el botón de regreso con desvanecimiento
+        fadeInButton(regresarButton, 500);  // Desvanecimiento del botón de regreso
+
+        // Animar el ícono y el título con desvanecimiento
+        animateElement(icono, 700, 0f, 1f);  // Desvanecimiento del ícono
+        animateElement(titulo, 900, 0f, 1f);  // Desvanecimiento del título
+
 
         ImageButton btnRegresarPrincipal = findViewById(R.id.regresar);
 
@@ -122,6 +141,22 @@ public class Configuracion extends AppCompatActivity {
 
     }
 
+
+    // Método para animar el desvanecimiento del botón de regreso
+    private void fadeInButton(View view, long delay) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);  // Desvanecimiento desde invisible (0f) a visible (1f)
+        fadeIn.setStartDelay(delay);  // Retraso para la animación
+        fadeIn.setDuration(1000);  // Duración del desvanecimiento
+        fadeIn.start();
+    }
+
+    // Método genérico para animar el desvanecimiento (alpha) de otros elementos
+    private void animateElement(View view, long delay, float startAlpha, float endAlpha) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", startAlpha, endAlpha);
+        fadeIn.setStartDelay(delay);  // Retraso para la animación secuencial
+        fadeIn.setDuration(500); // Duración de la animación
+        fadeIn.start();
+    }
     // Método para cargar la imagen de perfil desde Firebase
     private void cargarImagenDePerfil() {
         String userId = auth.getCurrentUser().getUid();

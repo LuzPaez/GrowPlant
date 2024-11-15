@@ -1,5 +1,6 @@
 package com.luzpaez.growplant;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,6 +8,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,6 +36,9 @@ public class RegistroPlantasHome extends AppCompatActivity {
     private List<Plant> originalPlantList;
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
+    private ImageButton regresarButton;
+    private ImageView iconoRegistroPlantas;
+    private TextView titulo;
 
 
 
@@ -40,6 +46,17 @@ public class RegistroPlantasHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_plantas_home);
+
+        regresarButton = findViewById(R.id.regresar);
+        iconoRegistroPlantas = findViewById(R.id.iconRegistroPlantas);
+        titulo = findViewById(R.id.titulo);
+
+        // Animar el botón de regreso con desvanecimiento
+        fadeInButton(regresarButton, 1000);  // Desvanecimiento del botón de regreso
+
+        // Animar el ícono y el título con desvanecimiento
+        animateElement(iconoRegistroPlantas, 700, 0f, 1f);  // Desvanecimiento del ícono
+        animateElement(titulo, 900, 0f, 1f);  // Desvanecimiento del título
 
         ImageButton btnRegresarPrincipal = findViewById(R.id.regresar);
 
@@ -103,6 +120,22 @@ public class RegistroPlantasHome extends AppCompatActivity {
 
         // Cargar datos desde Firebase
         loadPlantData();
+    }
+
+    // Método para animar el desvanecimiento del botón de regreso
+    private void fadeInButton(View view, long delay) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);  // Desvanecimiento desde invisible (0f) a visible (1f)
+        fadeIn.setStartDelay(delay);  // Retraso para la animación
+        fadeIn.setDuration(1000);  // Duración del desvanecimiento
+        fadeIn.start();
+    }
+
+    // Método genérico para animar el desvanecimiento (alpha) de otros elementos
+    private void animateElement(View view, long delay, float startAlpha, float endAlpha) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", startAlpha, endAlpha);
+        fadeIn.setStartDelay(delay);  // Retraso para la animación secuencial
+        fadeIn.setDuration(500); // Duración de la animación
+        fadeIn.start();
     }
 
     private void loadPlantData() {

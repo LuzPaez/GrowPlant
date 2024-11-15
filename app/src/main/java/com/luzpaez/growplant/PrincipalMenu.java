@@ -1,9 +1,11 @@
 package com.luzpaez.growplant;
 
+import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,12 +47,24 @@ public class PrincipalMenu extends AppCompatActivity implements TaskAdapter.OnTa
     private ArrayList<Task> taskList = new ArrayList<>();
     private ArrayList<Task> completedTaskList = new ArrayList<>();
     private TaskAdapter completedTaskAdapter;
+    private GridLayout gridLayout1;
+    private GridLayout gridLayout2;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal_menu);
+
+        gridLayout1 = findViewById(R.id.gridLa1);
+        gridLayout2 = findViewById(R.id.gridLayout);
+
+        // Ejemplo de animación para el primer GridLayout
+        fadeInGridLayout(gridLayout1);
+
+        // Ejemplo de animación para el segundo GridLayout
+        fadeInGridLayout(gridLayout2);
+
 
         // Inicializar Firebase
         auth = FirebaseAuth.getInstance();
@@ -273,5 +287,11 @@ public class PrincipalMenu extends AppCompatActivity implements TaskAdapter.OnTa
     public void onBackPressed() {
         super.onBackPressed();
         moveTaskToBack(true);  // Minimiza la aplicación en lugar de cerrarla
+    }
+
+    private void fadeInGridLayout(View gridLayout) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(gridLayout, "alpha", 0f, 1f);
+        fadeIn.setDuration(1000);  // Duración de la animación (1 segundo)
+        fadeIn.start();
     }
 }

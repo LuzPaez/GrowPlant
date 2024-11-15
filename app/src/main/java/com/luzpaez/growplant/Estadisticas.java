@@ -1,10 +1,12 @@
 package com.luzpaez.growplant;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,13 +51,29 @@ public class Estadisticas extends AppCompatActivity {
     private Map<String, Integer> dateCount; // Mapa para contar por fecha
     private List<String> dateLabels; // Lista para almacenar las etiquetas de las fechas
 
+    private ImageButton regresarButton;
+    private ImageView icono;
+    private TextView titulo;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_estadisticas);
 
-        ImageButton btnRegresarPrincipal = findViewById(R.id.regresar);
+        regresarButton = findViewById(R.id.regresar);
+        icono = findViewById(R.id.iconEstadisticas);
+        titulo = findViewById(R.id.titulo);
 
+        // Animar el botón de regreso con desvanecimiento
+        fadeInButton(regresarButton, 500);  // Desvanecimiento del botón de regreso
+
+        // Animar el ícono y el título con desvanecimiento
+        animateElement(icono, 700, 0f, 1f);  // Desvanecimiento del ícono
+        animateElement(titulo, 900, 0f, 1f);  // Desvanecimiento del título
+
+
+        ImageButton btnRegresarPrincipal = findViewById(R.id.regresar);
         // Listener para el botón de regresar a la página principal
         btnRegresarPrincipal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +94,21 @@ public class Estadisticas extends AppCompatActivity {
         cargarDatosFamilias();
     }
 
+    // Método para animar el desvanecimiento del botón de regreso
+    private void fadeInButton(View view, long delay) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);  // Desvanecimiento desde invisible (0f) a visible (1f)
+        fadeIn.setStartDelay(delay);  // Retraso para la animación
+        fadeIn.setDuration(1000);  // Duración del desvanecimiento
+        fadeIn.start();
+    }
+
+    // Método genérico para animar el desvanecimiento (alpha) de otros elementos
+    private void animateElement(View view, long delay, float startAlpha, float endAlpha) {
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(view, "alpha", startAlpha, endAlpha);
+        fadeIn.setStartDelay(delay);  // Retraso para la animación secuencial
+        fadeIn.setDuration(500); // Duración de la animación
+        fadeIn.start();
+    }
     private void cargarDatosFamilias() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {

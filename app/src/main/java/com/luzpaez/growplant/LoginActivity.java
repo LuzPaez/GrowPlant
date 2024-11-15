@@ -1,10 +1,13 @@
 package com.luzpaez.growplant;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +39,36 @@ public class LoginActivity extends AppCompatActivity {
         contrasenaInput = findViewById(R.id.contrasenaInputLogin);
         Button btnLogin = findViewById(R.id.btn_buttonLogin);
         btnLogin.setOnClickListener(v -> loginUser());
+
+        //ANIMACIONES
+        // Referencias a los elementos del layout
+        ImageView imgLogo = findViewById(R.id.imgLogo);
+        TextView textView1 = findViewById(R.id.textView1);
+        TextView textView2 = findViewById(R.id.textView2);
+
+        // Animación para el logo (deslizar desde arriba)
+        ObjectAnimator logoAnimator = ObjectAnimator.ofFloat(imgLogo, "translationY", -1000f, 0f);
+        logoAnimator.setDuration(1000); // Duración de 1 segundo
+
+        // Animación para textView1 (desvanecer)
+        ObjectAnimator textView1Animator = ObjectAnimator.ofFloat(textView1, "alpha", 0f, 1f);
+        textView1Animator.setDuration(1000); // Duración de 1 segundo
+
+        // Animación para textView2 (deslizar desde abajo)
+        ObjectAnimator textView2Animator = ObjectAnimator.ofFloat(textView2, "translationY", 500f, 0f);
+        textView2Animator.setDuration(1000); // Duración de 1 segundo
+
+        // Animación para el botón (desvanecer)
+        ObjectAnimator btnAnimator = ObjectAnimator.ofFloat(btnLogin, "alpha", 0f, 1f);
+        btnAnimator.setDuration(1000); // Duración de 1 segundo
+
+        // Combinamos las animaciones en un AnimatorSet para que se reproduzcan juntas
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(logoAnimator, textView1Animator, textView2Animator, btnAnimator);
+
+        // Iniciamos las animaciones
+        animatorSet.start();
+
     }
 
     private void loginUser() {
