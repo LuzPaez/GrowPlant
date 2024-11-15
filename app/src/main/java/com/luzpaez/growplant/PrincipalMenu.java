@@ -131,6 +131,17 @@ public class PrincipalMenu extends AppCompatActivity implements TaskAdapter.OnTa
             }
         });
 
+        // Botón para redirigir a la actividad de Recursos
+
+        CardView cardRecursos = findViewById(R.id.IrRecursos);
+        cardRecursos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PrincipalMenu.this, Recursos.class);
+                startActivity(intent);
+            }
+        });
+
 
         //agregar boton de recursos
 
